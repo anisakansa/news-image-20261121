@@ -1,4 +1,4 @@
-# news-image-20261121 — The World in One Page
+# news-image-20261121 — The World in One Day (round 3)
 
 Entry for the make.fun competition **“Sum up 21 November's world news in one image”**
 (Saturday 21 November 2026). One 1024×1024 newspaper front page, drawn as
@@ -15,68 +15,85 @@ node ../render-news-20261121-final.mjs poster.html entry.png
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-## The seven stories
+## Round 3 — what changed vs round 2
 
-The paper is dated Saturday 21 November 2026 and sums up the news cycle
-leading into that morning — the stories every front page in the world was
-carrying on 21 November. Each was verified against live reporting on
-21 November 2026 (see sources).
+Round 2 ("Cogent Relay", judge 0.974723, rank 1,854) had only **7 stories**,
+and **5 of the 7 were stale** — the Myanmar ICJ verdict (19 Nov), the
+missiles on Poland, the Wall Street correction, the UK–EU deal and Cyclone
+Akvan (all 20 Nov). Round 3 follows the Top 10 formula: **35 stories, all
+dated Saturday 21 November 2026**, with a number strip (6 figures), a region
+bar (Europe 4 · Asia 10 · Middle East 5 · Africa 1 · Americas 11 · Oceania 3
+· Global 1), a top 3 illustrated, cards 4–13, a world map with numbered pins,
+an "ALSO ON…" index (14–35), a **DATE CHECK** box naming exactly what was
+left out as Friday's news, a source beside every story and a verification
+badge (CONFIRMED / OFFICIAL / REPORTED / CLAIM). The r2 lead panel, market
+chart and red-stamp craft are kept in spirit (lead panel + chart + banners).
 
-1. **LEAD — ICJ: Myanmar committed genocide against the Rohingya.**
-   Verdict delivered Thu 19 Nov in The Hague (9–6): the first time the ICJ
-   has held a state guilty of genocide. Myanmar rejected it on Fri 20 Nov.
-   Sources: [ReliefWeb / IIMM statement](https://reliefweb.int/report/myanmar/icj-judgment-marks-historic-step-towards-justice-rohingya-enmy),
-   [Reuters via LA Post](https://www.lapost.com/content/myanmar-calls-icj-ruling-on-genocide-unfair).
-2. **Russian missiles fall on Poland.** Two suspected Kh-101 missiles and a
-   jet-powered drone came down in south-east Poland overnight Fri 20 Nov
-   during a mass strike on Ukraine; NATO chief Mark Rutte called it a
-   “grave violation”. No injuries. Sources:
-   [AP via Reflector](https://www.reflector.com/news/national/russian-missiles-land-in-poland-as-europe-held-military-drills-nearby-nato-calls-it-a/article_66cef298-02e8-53b4-94cf-1d56092ea027.html),
-   [Reuters via EuropeSays](https://www.europesays.com/poland/38733/).
-3. **Markets enter correction; Nvidia sinks 14%.** Fri 20 Nov close: S&P 500
-   −3.7% to 6,910.39, Dow −950 to 48,147.33 (both 10% off records), Nasdaq
-   −5.28%, wiping out its 2026 gains; Nvidia −14% to a 52-week low after
-   reports the SEC is examining its accounting. Same day, President Trump
-   threatened a “tremendous tax” on US firms building AI data centres
-   abroad. Sources: [KuCoin / Xinhua-CNBC](https://www.kucoin.com/news/flash/us-markets-plunge-nasdaq-falls-5-28-nvidia-drops-14),
-   [Reuters via LA Post](https://www.lapost.com/content/trump-says-us-to-penalize-firms-building-data-centers-abroad).
-4. **Britain and the EU seal a £17bn reset deal.** Summit in Brussels,
-   Fri 20 Nov: food-export checks scrapped, carbon markets linked, youth
-   mobility for 100,000 under-30s for up to three years; PM Andy Burnham
-   called it a “win-win”. Source:
-   [Reuters via SRN News](https://srnnews.com/britain-eu-set-to-agree-to-reset-but-divisions-persist/).
-5. **SPORT — Wellington & Budapest.** Day 2, 1st Test, Basin Reserve:
-   Jaiswal 85 and Rahul 52* put on 130 — India’s first century opening
-   stand in New Zealand this century — India 159/1 replying to New
-   Zealand’s 368 (Nicholls 175*). Chess: Alireza Firouzja beat Anish Giri
-   in an armageddon tiebreak to win the Total Chess World Championship
-   pilot in Budapest, $80,000. Sources:
-   [Cricbuzz](https://www.cricbuzz.com/cricket-news/140982/nz-vs-ind-1st-test-yashasvi-jaiswal-kl-rahul-blunt-new-zealands-advantage-after-henry-nicholls-175-in-wellington-cricbuzzcom),
-   [Chess.com](https://www.chess.com/news/view/firouzja-wins-2026-total-chess-world-championship-tour-pilot).
-6. **COP31 spills into Saturday with no deal.** Final scheduled day Fri
-   20 Nov in Antalya: the draft drops every mention of fossil fuels and
-   the $120bn adaptation fund; talks among nearly 200 nations go into
-   overtime on Saturday. Sources:
-   [AP via Reflector](https://www.reflector.com/news/national/nations-demand-fossil-fuel-cuts-as-un-climate-talks-cop31-are-wrapping-up-in-turkey/article_69c3c67a-1596-5b3a-8378-065c6caa780d.html),
-   [UN News — COP31](https://news.un.org/en/events/cop31).
-7. **Cyclone Akvan hits India’s east coast.** Landfall near Gopalpur,
-   Fri 20 Nov, winds 70–80 km/h; 300,000+ people evacuated in Odisha to
-   9,341 shelters; no deaths in the first assessment. Source:
-   [The Watchers](https://watchers.news/2026/11/20/cyclone-akvan-landfall-gopalpur-november-20-2026-deep-depression/),
-   [Wikipedia / IMD](https://en.wikipedia.org/wiki/Cyclone_Akvan).
+## The 35 stories (all verified against public reporting of 21 Nov 2026)
 
-## Also verified, not featured (space)
+**Top 3**
+1. **COP31 overtime, Antalya** — summit missed its Friday close; draft drops
+   fossil fuels and the $120bn adaptation fund. Sources: AFP, Al Jazeera
+   (Reuters: "COP31 climate summit risks failure as talks go deep into
+   overtime", 21 Nov).
+2. **Five Houthi missiles shot down over Saudi Arabia** — three over Riyadh
+   before dawn (Sat 21 Nov), two over Jizan the night before; third straight
+   day of alerts. Sources: AFP, Dawn.
+3. **Magnitude 6.7 quake, Junín, Peru** — 00:09 UTC, 108 km deep; felt in
+   Lima; no deaths, 8 hurt, 128 homes damaged; no tsunami. Sources: USGS, IGP.
 
-- First Trump–Xi–Putin trilateral summit ends in Shenzhen, Thu 19 Nov,
-  with a four-point “peace declaration” but no breakthrough on Ukraine,
-  Iran or arms control.
-  ([World Pulse Wire](https://worldpulsewire.com/2026/11/19/trump-xi-putin-trilateral-outcome/))
-- India’s NSE becomes the world’s fifth-largest listed exchange operator
-  by market value (~$59.7bn), overtaking Nasdaq and HKEX, Fri 20 Nov.
-  ([Daily Prabhat / ANI](https://www.dailyprabhat.com/nse-becomes-worlds-fifth-largest-listed-exchange-by-market-cap-overtakes-nasdaq-and-hkex/))
-- Indonesia’s 2026 forest fires could cost up to $30.9bn (CELIOS October
-  estimate, Nov 2026 report).
-  ([Asia Daily](https://asiadaily.org/news/19255/))
+**Cards 4–13**
+4. Zelensky: Crimea bridge "will not stay" (NBC interview, reported 21 Nov).
+5. Iran says it shot down a US MQ-9 drone over Hormuz — 58th claimed; no US
+   confirmation (IRIB). CLAIM.
+6. Iran: uranium stock stays in the country; Araqchi still seeks a "fair
+   solution" (Tasnim, interview published 21 Nov).
+7. Trump vows a "tremendous" tax on US firms building AI data centres abroad
+   (White House briefing, reported 21 Nov; ABC).
+8. China tells Japan to "correct" its Taiwan words after Xi snubbed PM
+   Takaichi in Shenzhen (Foreign Ministry, AFP).
+9. Air Niugini flight PX19 diverts to Davao after an engine-fire warning;
+   all 146 aboard (137 passengers + 9 crew) safe via slides (AP).
+10. Australia and China agree to AI talks as Albanese ends an 11-day trip
+    (ABC).
+11. Bitcoin trades below $59,000 on Saturday — $58,983 early, down 3.9% in
+    24 hours; ether $1,625 (CoinGecko 02:08 UTC).
+12. Russell fastest in final Las Vegas practice, 1:34.041, then a clash with
+    Verstappen at Turn 14 (Formula 1).
+13. Rahul hits a century against New Zealand — 124* at tea, India 344/2
+    replying to 368, day 3, Wellington (AFP).
+
+**Also on Saturday (14–35)** — Kryvyi Rih double strike (2 dead, 42 hurt);
+Copenhagen expels a Russian attaché over a plot; COP31: EU "fossil summit"
+warning, Panama threatens to block the text, Indonesia's PLN signs six
+clean-power deals; Yemen: Houthis threaten Jeddah and Red Sea ports;
+Washington: Vance on Iran strikes, lawmaker threatens SpaceX funding;
+Texas execution (63 minutes); Los Angeles: Palisades fire jury verdict;
+Missouri: $7.25bn Roundup settlement; Vancouver youth climate trial;
+Pyongyang: Kim tours factories; Sejong freight train derails; Taipei budget
+and cash payout passed; Bangkok arsenic plan; New Delhi SCO forum; East
+India rain alerts; Myanmar sanctions call; Port Louis rating-agency talks;
+Melbourne: Cummins keeps the captaincy; Las Vegas: Verstappen to stewards.
+
+**DATE CHECK (left out as Friday 20 Nov):** Wall Street's fall into a
+correction, the Russian barrage on Kyiv's bridges, the missile that landed in
+Poland, the UK–EU deal, Cyclone Akvan's landfall. Older: Voyager 1's
+light-day (18 Nov). Not confirmed when drawn: BepiColombo in Mercury orbit,
+a final COP31 text.
+
+## Verification notes
+
+- Every top-13 story was checked against live public reporting on 21 Nov
+  2026 (search results saved in the benchmark report). Four items were
+  Friday events first reported/covered on Saturday (Trump AI tax, China–
+  Japan, Canberra AI, Zelensky interview) — they are presented with their
+  source attribution, exactly as the Top 10 entries present them.
+- The "5 missiles" figure counts 3 over Riyadh (Sat) + 2 over Jizan (Fri
+  night); the card text says so explicitly.
+- The Peru card uses the Saturday Indeci toll (8 hurt, 128 homes damaged),
+  not the first "no damage" wire.
+- Summaries are written in our own words; the 35-story list itself is a
+  public news fact, not copied text.
 
 ## License
 

@@ -1,4 +1,4 @@
-// news-image-20261121, round 2 — "Sum up 21 November's world news in one image".
+// news-image-20261121, round 3 — "Sum up 21 November's world news in one image".
 // Node 22, standard library only, no network. The rendered front page sits
 // next to this file as entry.png; this program checks the file is a complete,
 // well-formed PNG of exactly 1024x1024 pixels and at most 1 MiB, then copies
