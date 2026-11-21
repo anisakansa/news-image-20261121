@@ -7,117 +7,167 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1024px; height: 1024px; }
   body {
-    background: #f7f1e3;
-    color: #161513;
+    background: #f6f0e1;
+    color: #171512;
     font-family: Georgia, 'Times New Roman', serif;
-    padding: 16px 28px 12px 28px;
-    display: flex;
-    flex-direction: column;
+    padding: 14px 26px 10px 26px;
+    display: flex; flex-direction: column;
     overflow: hidden;
   }
-  .dateline {
+  /* ---------- top strip ---------- */
+  .strip {
     display: flex; justify-content: space-between;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12.5px; letter-spacing: 2.5px; font-weight: bold;
-    text-transform: uppercase; color: #161513;
-    border-bottom: 3px solid #161513; padding-bottom: 7px;
+    font-size: 12px; letter-spacing: 2.5px; font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 3px solid #171512; padding-bottom: 6px;
   }
-  .dateline .red { color: #a31621; }
-  .masthead { text-align: center; padding: 8px 0 6px 0; border-bottom: 1px solid #161513; }
-  .masthead h1 {
-    font-size: 58px; line-height: 0.95; font-weight: 900; letter-spacing: -1px;
+  .strip .accent { color: #a31621; }
+  /* ---------- nameplate ---------- */
+  .nameplate { text-align: center; padding: 5px 0 4px 0; border-bottom: 1px solid #171512; }
+  .nameplate h1 { font-size: 50px; line-height: 0.95; font-weight: 900; letter-spacing: -1px; }
+  .nameplate h1 em { font-weight: 400; }
+  .nameplate .tagline {
+    font-family: Arial, Helvetica, sans-serif; font-size: 12.5px;
+    letter-spacing: 4px; text-transform: uppercase; margin-top: 4px; color: #453f38;
   }
-  .masthead h1 .thin { font-weight: 400; font-style: italic; }
-  .masthead .sub {
-    font-family: Arial, Helvetica, sans-serif; font-size: 13px;
-    letter-spacing: 4px; text-transform: uppercase; margin-top: 5px; color: #44403a;
+  .nameplate .tagline b { color: #a31621; }
+  /* ---------- lead story + verdict panel ---------- */
+  .front { display: flex; gap: 20px; padding: 8px 0 8px 0; border-bottom: 3px double #171512; }
+  .front .story { flex: 1 1 620px; }
+  .eyebrow {
+    font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; color: #a31621; margin-bottom: 5px;
   }
-  .masthead .sub b { color: #a31621; }
-  /* ---------- LEAD ---------- */
-  .lead { padding: 11px 0 10px 0; border-bottom: 3px double #161513; }
-  .kicker {
-    font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold;
-    letter-spacing: 3px; text-transform: uppercase; color: #a31621; margin-bottom: 6px;
+  .front h2 { font-size: 42px; line-height: 1.0; font-weight: 900; letter-spacing: -0.5px; }
+  .front .standfirst {
+    font-size: 16.5px; line-height: 1.28; font-style: italic; color: #332f2a; margin-top: 5px;
   }
-  .lead h2 { font-size: 46px; line-height: 1.02; font-weight: 900; letter-spacing: -0.5px; }
-  .lead .deck {
-    font-size: 18.5px; line-height: 1.28; font-style: italic; color: #33302b; margin-top: 7px;
+  .front .text { font-size: 14.5px; line-height: 1.36; margin-top: 5px; text-align: justify; }
+  .front .text b { color: #a31621; }
+  .verdict {
+    flex: 0 0 300px; background: #a31621; color: #f6f0e1;
+    padding: 12px 16px 11px 16px; text-align: center;
+    display: flex; flex-direction: column; justify-content: center;
   }
-  .lead .body { font-size: 15.5px; line-height: 1.4; margin-top: 7px; text-align: justify; }
-  .lead .body b { color: #a31621; }
-  /* ---------- 3 COLUMNS ---------- */
-  .cols { display: flex; gap: 22px; padding: 10px 0 10px 0; border-bottom: 1px solid #161513; }
-  .col { flex: 1; }
-  .col + .col { border-left: 1px solid #b9b0a0; padding-left: 22px; }
-  .col h3 { font-size: 23px; line-height: 1.08; font-weight: 900; margin: 4px 0 6px 0; }
-  .col p { font-size: 14.5px; line-height: 1.4; text-align: justify; }
-  .col p + p { margin-top: 6px; }
-  .col p b { color: #a31621; }
-  /* ---------- SPORT BAND ---------- */
+  .verdict .vlabel {
+    font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase; color: #f4c95d;
+  }
+  .verdict .vcount { font-size: 58px; line-height: 1.0; font-weight: 900; letter-spacing: -2px; margin: 2px 0 3px 0; }
+  .verdict .vcount small { font-size: 22px; letter-spacing: 0; font-weight: 700; }
+  .verdict .stamp {
+    border: 3px solid #f6f0e1; border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 900;
+    letter-spacing: 3px; padding: 3px 0 2px 0; margin: 2px 6px 5px 6px;
+  }
+  .verdict .vnote { font-size: 14.5px; line-height: 1.35; font-style: italic; }
+  .verdict .vfoot {
+    font-family: Arial, Helvetica, sans-serif; font-size: 11.5px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 7px; color: #f4c95d;
+  }
+  /* ---------- three columns ---------- */
+  .trio { display: flex; gap: 20px; padding: 8px 0 8px 0; border-bottom: 1px solid #171512; }
+  .story-col { flex: 1; }
+  .story-col + .story-col { border-left: 1px solid #b8af9e; padding-left: 20px; }
+  .story-col h3 { font-size: 21px; line-height: 1.06; font-weight: 900; margin: 3px 0 4px 0; }
+  .story-col p { font-size: 13.5px; line-height: 1.36; text-align: justify; }
+  .story-col p + p { margin-top: 5px; }
+  .story-col p b { color: #a31621; }
+  /* ---------- market chart (middle column) ---------- */
+  .chart { margin: 2px 0 6px 0; }
+  .chart .bar-row { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+  .chart .bar-row .nm {
+    flex: 0 0 74px; font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.5px; font-weight: 700; text-transform: uppercase;
+  }
+  .chart .bar-track { flex: 1; height: 18px; background: #e4dcc8; }
+  .chart .bar-fill { height: 18px; background: #a31621; }
+  .chart .bar-row .pct {
+    flex: 0 0 60px; text-align: right;
+    font-family: Arial, Helvetica, sans-serif; font-size: 19px; font-weight: 900; color: #a31621;
+  }
+  .chart .levels {
+    font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 700;
+    margin-top: 7px; padding-top: 6px; border-top: 1px solid #b8af9e; line-height: 1.5;
+  }
+  .chart .levels span { color: #a31621; }
+  /* ---------- sport strip ---------- */
   .sport {
-    background: #1d3557; color: #f7f1e3; margin-top: 10px; padding: 9px 16px 10px 16px;
-    display: flex; gap: 18px; align-items: flex-start;
+    background: #1d3557; color: #f6f0e1; margin-top: 8px; padding: 7px 15px 8px 15px;
+    display: flex; gap: 16px; align-items: flex-start;
   }
-  .sport .label {
-    font-family: Arial, Helvetica, sans-serif; font-size: 26px; font-weight: 900;
+  .sport .slabel {
+    font-family: Arial, Helvetica, sans-serif; font-size: 25px; font-weight: 900;
     letter-spacing: 2px; color: #f4c95d; writing-mode: vertical-rl; transform: rotate(180deg);
     text-align: center; flex: 0 0 auto; align-self: center;
   }
-  .sport .items { flex: 1; }
-  .sport .item + .item { margin-top: 7px; padding-top: 7px; border-top: 1px solid #4a6b8f; }
-  .sport .item b { font-size: 17.5px; }
-  .sport .item span { font-size: 15.5px; line-height: 1.35; }
-  /* ---------- BOTTOM BANDS ---------- */
-  .bands { display: flex; gap: 22px; margin-top: 12px; padding-top: 2px; flex: 1; }
-  .band { flex: 1; }
-  .band + .band { border-left: 1px solid #b9b0a0; padding-left: 22px; }
-  .band .kicker { font-size: 12.5px; }
-  .band h4 { font-size: 22.5px; line-height: 1.12; font-weight: 900; margin: 5px 0 6px 0; }
-  .band p { font-size: 15px; line-height: 1.45; text-align: justify; }
-  /* ---------- FOOTER ---------- */
-  .footer {
-    margin-top: 8px; padding-top: 6px; border-top: 3px solid #161513;
+  .sport .sitems { flex: 1; }
+  .sport .sitem + .sitem { margin-top: 6px; padding-top: 6px; border-top: 1px solid #4a6b8f; }
+  .sport .sitem b { font-size: 16px; }
+  .sport .sitem span { font-size: 14.5px; line-height: 1.3; }
+  /* ---------- bottom pair ---------- */
+  .pair { display: flex; gap: 20px; margin-top: 9px; flex: 1; }
+  .pair .story-col h4 { font-size: 21px; line-height: 1.08; font-weight: 900; margin: 3px 0 4px 0; }
+  .pair .story-col p { font-size: 14px; line-height: 1.4; }
+  /* ---------- colophon ---------- */
+  .colophon {
+    margin-top: 6px; padding-top: 5px; border-top: 3px solid #171512;
     font-family: Arial, Helvetica, sans-serif; font-size: 10.5px; line-height: 1.45;
     color: #55504a; text-align: center;
   }
-  .footer b { color: #161513; }
+  .colophon b { color: #171512; }
 </style>
 </head>
 <body>
 
-  <div class="dateline">
+  <div class="strip">
     <span>Saturday 21 November 2026</span>
-    <span class="red">The day's news &mdash; one page</span>
+    <span class="accent">The day&rsquo;s news &mdash; one page</span>
     <span>No. 325 &bull; Free</span>
   </div>
 
-  <div class="masthead">
-    <h1>THE WORLD <span class="thin">in one page</span></h1>
-    <div class="sub">Saturday 21 November 2026 &nbsp;&bull;&nbsp; <b>Seven stories that defined the day</b></div>
+  <div class="nameplate">
+    <h1>THE WORLD <em>in one page</em></h1>
+    <div class="tagline">Saturday 21 November 2026 &nbsp;&bull;&nbsp; <b>Seven stories that defined the day</b></div>
   </div>
 
-  <div class="lead">
-    <div class="kicker">The Hague &mdash; Landmark verdict</div>
-    <h2>MYANMAR COMMITTED GENOCIDE, WORLD COURT RULES</h2>
-    <div class="deck">The International Court of Justice finds the state responsible for the 2017 atrocities against the Rohingya &mdash; the first time it has ever held a state guilty of genocide &mdash; and orders return, restitution and compensation.</div>
-    <div class="body">By <b>nine votes to six</b>, judges in The Hague held that Myanmar&rsquo;s military killed thousands, committed widespread sexual violence and razed villages in Rakhine State, and that the only reasonable inference was an intent to destroy the Rohingya. The court ordered investigations and prosecutions, the safe return of the displaced, and compensation to be fixed later. Myanmar called the ruling &ldquo;a great disappointment&rdquo;. The judgment is final and binding &mdash; but the court has no force to enforce it.</div>
+  <div class="front">
+    <div class="story">
+      <div class="eyebrow">The Hague &mdash; Landmark verdict</div>
+      <h2>MYANMAR COMMITTED GENOCIDE, WORLD COURT RULES</h2>
+      <div class="standfirst">The International Court of Justice finds the state responsible for the 2017 atrocities against the Rohingya &mdash; the first time it has ever held a state guilty of genocide &mdash; and orders return, restitution and compensation.</div>
+      <div class="text">By <b>nine votes to six</b>, judges in The Hague held that Myanmar&rsquo;s military killed thousands, committed widespread sexual violence and razed villages in Rakhine State, and that the only reasonable inference was an intent to destroy the Rohingya. The court ordered investigations and prosecutions, the safe return of the displaced, and compensation to be fixed later. Myanmar called the ruling &ldquo;a great disappointment&rdquo;. The judgment is final and binding &mdash; but the court has no force to enforce it.</div>
+    </div>
+    <div class="verdict">
+      <div class="vlabel">The verdict</div>
+      <div class="vcount">9&ndash;6 <small>votes</small></div>
+      <div class="stamp">GENOCIDE</div>
+      <div class="vnote">The first time in history the World Court has held a state guilty of genocide.</div>
+      <div class="vfoot">Final &bull; Binding &bull; Unenforced</div>
+    </div>
   </div>
 
-  <div class="cols">
-    <div class="col">
-      <div class="kicker">Poland &mdash; NATO&rsquo;s flank</div>
+  <div class="trio">
+    <div class="story-col">
+      <div class="eyebrow">Poland &mdash; NATO&rsquo;s flank</div>
       <h3>Russian missiles fall on Poland</h3>
       <p>Two suspected Russian missiles and a jet-powered drone came down in south-east Poland during a huge overnight strike on Ukraine.</p>
       <p>NATO chief Mark Rutte called it a <b>&ldquo;grave violation&rdquo;</b> of allied airspace. No one was hurt. PM Donald Tusk called it a likely provocation as allied drills went on nearby &mdash; and Warsaw will ask NATO for more air defences.</p>
     </div>
-    <div class="col">
-      <div class="kicker">Wall Street &mdash; The AI rout</div>
+    <div class="story-col">
+      <div class="eyebrow">Wall Street &mdash; The AI rout</div>
       <h3>Markets enter correction as Nvidia sinks 14%</h3>
-      <p>The S&amp;P 500 fell <b>3.7%</b> and the Dow 950 points on Friday &mdash; both now 10% below their records. The Nasdaq plunged 5.3%, wiping out its 2026 gains.</p>
-      <p>Nvidia crashed 14% to a 52-week low after reports the SEC is examining its accounting. At the White House, President Trump threatened a <b>&ldquo;tremendous tax&rdquo;</b> on US firms building AI data centres abroad.</p>
+      <div class="chart">
+        <div class="bar-row"><span class="nm">Nvidia</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="pct">&minus;14%</span></div>
+        <div class="bar-row"><span class="nm">Nasdaq</span><div class="bar-track"><div class="bar-fill" style="width:38%"></div></div><span class="pct">&minus;5.28%</span></div>
+        <div class="bar-row"><span class="nm">S&amp;P 500</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="pct">&minus;3.7%</span></div>
+        <div class="levels">S&amp;P 500 <span>6,910.39</span> &nbsp;&bull;&nbsp; Dow <span>48,147.33</span> (&minus;950 pts)</div>
+      </div>
+      <p>Nvidia crashed 14% to a 52-week low after reports the SEC is examining its accounting. The Nasdaq plunge wiped out its 2026 gains. At the White House, President Trump threatened a <b>&ldquo;tremendous tax&rdquo;</b> on US firms building AI data centres abroad.</p>
     </div>
-    <div class="col">
-      <div class="kicker">Brussels &mdash; The reset</div>
+    <div class="story-col">
+      <div class="eyebrow">Brussels &mdash; The reset</div>
       <h3>Britain and EU seal &pound;17bn deal</h3>
       <p>PM Andy Burnham hailed a <b>&ldquo;win-win&rdquo;</b> as Britain and the EU agreed to scrap most food-export checks, link carbon markets and open a youth mobility scheme for 100,000 young people for up to three years.</p>
       <p>The package could add &pound;17bn to the UK economy &mdash; but the deals hinge on a row over tuition fees for EU students.</p>
@@ -125,27 +175,27 @@
   </div>
 
   <div class="sport">
-    <div class="label">SPORT</div>
-    <div class="items">
-      <div class="item"><b>Wellington:</b> <span>Jaiswal (85) and Rahul (52*) put on 130 &mdash; India&rsquo;s first century opening stand in New Zealand this century &mdash; as India reached 159/1 replying to New Zealand&rsquo;s 368.</span></div>
-      <div class="item"><b>Budapest:</b> <span>Alireza Firouzja came from behind to beat Anish Giri in an armageddon tiebreak and win the Total Chess World Championship pilot &mdash; $80,000 and a place on the 2027 tour.</span></div>
+    <div class="slabel">SPORT</div>
+    <div class="sitems">
+      <div class="sitem"><b>Wellington:</b> <span>Jaiswal (85) and Rahul (52*) put on 130 &mdash; India&rsquo;s first century opening stand in New Zealand this century &mdash; as India reached 159/1 replying to New Zealand&rsquo;s 368.</span></div>
+      <div class="sitem"><b>Budapest:</b> <span>Alireza Firouzja came from behind to beat Anish Giri in an armageddon tiebreak and win the Total Chess World Championship pilot &mdash; $80,000 and a place on the 2027 tour.</span></div>
     </div>
   </div>
 
-  <div class="bands">
-    <div class="band">
-      <div class="kicker">Antalya &mdash; Climate</div>
+  <div class="pair">
+    <div class="story-col">
+      <div class="eyebrow">Antalya &mdash; Climate</div>
       <h4>COP31 spills into Saturday with no deal</h4>
       <p>The final draft drops every mention of fossil fuels &mdash; and a $120bn adaptation fund for poorer nations. Talks among nearly 200 countries run into overtime as the 1.5&deg;C limit slips away.</p>
     </div>
-    <div class="band">
-      <div class="kicker">Odisha &mdash; Cyclone Akvan</div>
+    <div class="story-col">
+      <div class="eyebrow">Odisha &mdash; Cyclone Akvan</div>
       <h4>300,000 moved as storm hits India&rsquo;s coast</h4>
       <p>Akvan crossed near Gopalpur with winds of 70&ndash;80 km/h after weakening from a severe cyclonic storm. No deaths were reported in the first assessment; 9,341 shelters stood ready.</p>
     </div>
   </div>
 
-  <div class="footer">
+  <div class="colophon">
     <b>Sources:</b> ICJ &amp; ReliefWeb &bull; Reuters / AP &bull; India Meteorological Department &bull; Chess.com &bull; Cricbuzz &bull; UN News &mdash; full list in README.md<br>
     The World in One Page &bull; Saturday 21 November 2026 &bull; All seven stories verified against live reports of 20&ndash;21 November 2026.
   </div>

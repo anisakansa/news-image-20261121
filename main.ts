@@ -1,72 +1,98 @@
-// news-image-20261121 — "Sum up 21 November's world news in one image".
-// Node 22, standard library only, no network. The entry image lives beside
-// this file as entry.png; this program validates it and copies it byte-for-byte
-// to /output/entry.png (or $MAKEFUN_OUTPUT_DIR for local runs), so two runs
-// always write identical bytes.
+// news-image-20261121, round 2 — "Sum up 21 November's world news in one image".
+// Node 22, standard library only, no network. The rendered front page sits
+// next to this file as entry.png; this program checks the file is a complete,
+// well-formed PNG of exactly 1024x1024 pixels and at most 1 MiB, then copies
+// it byte-for-byte to $MAKEFUN_OUTPUT_DIR (or /output). Because the copy is
+// verbatim, two runs always produce identical output bytes.
 //
-// Validation: PNG magic, width/height from the IHDR chunk (exactly 1024x1024),
-// an IEND chunk at the end, and a total size of at most 1 MiB (1048576 bytes).
-// The IHDR chunk length must be 13, and the on-disk size must match the
-// bytes read, so a truncated or swapped file cannot slip through.
+// Checks performed, in order:
+//   1. the on-disk size matches the bytes actually read (no truncation);
+//   2. total size is within the 1 MiB cap;
+//   3. the 8-byte PNG signature is correct;
+//   4. the first chunk is IHDR, 13 bytes long, declaring 1024x1024;
+//   5. every chunk is whole, its CRC32 matches its contents, at least one
+//      IDAT chunk is present, and the file ends exactly at IEND.
 
+import { createHash } from 'node:crypto';
 import { copyFileSync, mkdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const MAX_BYTES = 1048576;
-const MAX_DIMENSION = 1024;
-const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
-const IEND_TAIL = Buffer.from([0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82]);
+const SIZE_CAP = 1048576;
+const SIDE = 1024;
+const SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
-const source = new URL('./entry.png', import.meta.url);
-const bytes = readFileSync(source);
-const diskSize = statSync(source).size;
-if (diskSize !== bytes.length) {
-  throw new Error(`entry.png size mismatch: ${diskSize} on disk vs ${bytes.length} read`);
+// CRC-32 (IEEE 802.3) table, built once at startup.
+const crcTable = new Uint32Array(256);
+for (let n = 0; n < 256; n += 1) {
+  let c = n;
+  for (let k = 0; k < 8; k += 1) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+  crcTable[n] = c >>> 0;
+}
+function crc32(buf) {
+  let c = 0xffffffff;
+  for (const byte of buf) c = crcTable[(c ^ byte) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
 }
 
-if (bytes.length > MAX_BYTES) {
-  throw new Error(`entry.png is ${bytes.length} bytes, over the 1 MiB limit`);
+function fail(message) {
+  throw new Error(`entry.png rejected: ${message}`);
 }
-if (!bytes.subarray(0, 8).equals(PNG_MAGIC)) {
-  throw new Error('entry.png is not a PNG (bad magic bytes)');
+
+const entryUrl = new URL('./entry.png', import.meta.url);
+const image = readFileSync(entryUrl);
+const onDisk = statSync(entryUrl).size;
+if (onDisk !== image.length) {
+  fail(`on-disk size ${onDisk} differs from ${image.length} bytes read`);
 }
-// IHDR: length (4, must be 13) + "IHDR" (4) + width (4, BE) + height (4, BE).
-if (bytes.readUInt32BE(8) !== 13) {
-  throw new Error('entry.png IHDR chunk length is not 13');
+if (image.length > SIZE_CAP) {
+  fail(`${image.length} bytes exceeds the 1 MiB cap`);
 }
-if (bytes.toString('ascii', 12, 16) !== 'IHDR') {
-  throw new Error('entry.png has no IHDR chunk after the PNG signature');
+if (image.length < 8 || !image.subarray(0, 8).equals(SIGNATURE)) {
+  fail('bad PNG signature');
 }
-const width = bytes.readUInt32BE(16);
-const height = bytes.readUInt32BE(20);
-if (width !== MAX_DIMENSION || height !== MAX_DIMENSION) {
-  throw new Error(`entry.png is ${width}x${height}, must be exactly 1024x1024`);
-}
-// Walk the chunk chain: every chunk must be whole, an IDAT chunk must exist,
-// and the last chunk must be IEND (checked below via the tail bytes).
-let offset = 8;
-let sawIdat = false;
-while (offset + 8 <= bytes.length) {
-  const chunkLength = bytes.readUInt32BE(offset);
-  const chunkType = bytes.toString('ascii', offset + 4, offset + 8);
-  if (offset + 12 + chunkLength > bytes.length) {
-    throw new Error(`entry.png chunk ${chunkType} at ${offset} is truncated`);
+
+// Parse the chunk chain into a list, validating each chunk's CRC as we go.
+const chunks = [];
+let cursor = 8;
+while (cursor + 8 <= image.length) {
+  const dataLength = image.readUInt32BE(cursor);
+  const type = image.toString('ascii', cursor + 4, cursor + 8);
+  const dataEnd = cursor + 8 + dataLength;
+  if (dataEnd + 4 > image.length) {
+    fail(`chunk ${type} at offset ${cursor} runs past the end of the file`);
   }
-  if (chunkType === 'IDAT') sawIdat = true;
-  offset += 12 + chunkLength;
-  if (chunkType === 'IEND') break;
+  const storedCrc = image.readUInt32BE(dataEnd);
+  const actualCrc = crc32(image.subarray(cursor + 4, dataEnd));
+  if (storedCrc !== actualCrc) {
+    fail(`chunk ${type} at offset ${cursor} has a bad CRC`);
+  }
+  chunks.push({ type, dataLength, offset: cursor });
+  cursor = dataEnd + 4;
+  if (type === 'IEND') break;
 }
-if (!sawIdat) {
-  throw new Error('entry.png has no IDAT chunk (no image data)');
-}
-if (offset !== bytes.length) {
-  throw new Error('entry.png has trailing bytes after the IEND chunk');
-}
-if (!bytes.subarray(bytes.length - 12).equals(IEND_TAIL)) {
-  throw new Error('entry.png has no IEND chunk at the end');
+if (cursor !== image.length) {
+  fail('trailing bytes after the IEND chunk');
 }
 
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-mkdirSync(outDir, { recursive: true });
-copyFileSync(source, join(outDir, 'entry.png'));
-console.log(`entry.png ${width}x${height}, ${bytes.length} bytes -> ${join(outDir, 'entry.png')}`);
+const [first] = chunks;
+if (!first || first.type !== 'IHDR' || first.dataLength !== 13) {
+  fail('first chunk is not a 13-byte IHDR');
+}
+const width = image.readUInt32BE(16);
+const height = image.readUInt32BE(20);
+if (width !== SIDE || height !== SIDE) {
+  fail(`dimensions are ${width}x${height}, must be exactly ${SIDE}x${SIDE}`);
+}
+if (!chunks.some((chunk) => chunk.type === 'IDAT')) {
+  fail('no IDAT chunk (no image data)');
+}
+if (chunks[chunks.length - 1].type !== 'IEND') {
+  fail('last chunk is not IEND');
+}
+
+const destination = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+mkdirSync(destination, { recursive: true });
+const target = join(destination, 'entry.png');
+copyFileSync(entryUrl, target);
+const digest = createHash('sha256').update(image).digest('hex');
+console.log(`entry.png ${width}x${height}, ${image.length} bytes, sha256 ${digest} -> ${target}`);
