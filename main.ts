@@ -4,8 +4,10 @@
 // to /output/entry.png (or $MAKEFUN_OUTPUT_DIR for local runs), so two runs
 // always write identical bytes.
 //
-// Validation: PNG magic, width/height from the IHDR chunk (max 1024x1024),
+// Validation: PNG magic, width/height from the IHDR chunk (exactly 1024x1024),
 // an IEND chunk at the end, and a total size of at most 1 MiB (1048576 bytes).
+// The IHDR chunk length must be 13, and the on-disk size must match the
+// bytes read, so a truncated or swapped file cannot slip through.
 
 import { copyFileSync, mkdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -17,6 +19,10 @@ const IEND_TAIL = Buffer.from([0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e, 0x44, 0
 
 const source = new URL('./entry.png', import.meta.url);
 const bytes = readFileSync(source);
+const diskSize = statSync(source).size;
+if (diskSize !== bytes.length) {
+  throw new Error(`entry.png size mismatch: ${diskSize} on disk vs ${bytes.length} read`);
+}
 
 if (bytes.length > MAX_BYTES) {
   throw new Error(`entry.png is ${bytes.length} bytes, over the 1 MiB limit`);
@@ -24,14 +30,17 @@ if (bytes.length > MAX_BYTES) {
 if (!bytes.subarray(0, 8).equals(PNG_MAGIC)) {
   throw new Error('entry.png is not a PNG (bad magic bytes)');
 }
-// IHDR: length (4) + "IHDR" (4) + width (4, BE) + height (4, BE).
+// IHDR: length (4, must be 13) + "IHDR" (4) + width (4, BE) + height (4, BE).
+if (bytes.readUInt32BE(8) !== 13) {
+  throw new Error('entry.png IHDR chunk length is not 13');
+}
 if (bytes.toString('ascii', 12, 16) !== 'IHDR') {
   throw new Error('entry.png has no IHDR chunk after the PNG signature');
 }
 const width = bytes.readUInt32BE(16);
 const height = bytes.readUInt32BE(20);
-if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-  throw new Error(`entry.png is ${width}x${height}, over the 1024x1024 limit`);
+if (width !== MAX_DIMENSION || height !== MAX_DIMENSION) {
+  throw new Error(`entry.png is ${width}x${height}, must be exactly 1024x1024`);
 }
 // Walk the chunk chain: every chunk must be whole, an IDAT chunk must exist,
 // and the last chunk must be IEND (checked below via the tail bytes).
