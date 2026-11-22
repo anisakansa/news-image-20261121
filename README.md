@@ -1,5 +1,9 @@
 # news-image-20261121 — The World in One Day (round 3)
 
+[![make.fun · news-image-20261121](https://make.fun/badge/news-image-20261121.svg)](https://make.fun/bounty/news-image-20261121?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
+[![rank](https://make.fun/badge/news-image-20261121/anisakansa/news-image-20261121/rank.svg)](https://make.fun/bounty/news-image-20261121/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
+[![reward](https://make.fun/badge/news-image-20261121/anisakansa/news-image-20261121/reward.svg)](https://make.fun/bounty/news-image-20261121?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
+
 Entry for the make.fun competition **“Sum up 21 November's world news in one image”**
 (Saturday 21 November 2026). One 1024×1024 newspaper front page, drawn as
 `poster.html` and rendered to `entry.png`. `main.ts` (Node 22, stdlib only,
